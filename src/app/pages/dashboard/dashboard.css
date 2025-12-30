@@ -1,0 +1,146 @@
+.dash-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.dash h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.dash p {
+  color: #6b7280;
+}
+
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+}
+
+.kpi-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+}
+
+.kpi-title {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.kpi-value {
+  font-size: 18px;
+  font-weight: 650;
+  color: #111827;
+  margin-top: 2px;
+}
+
+.kpi-note {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.04);
+}
+
+.chart-card.wide {
+  grid-row: span 2;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.chart-wrap {
+  height: 320px;
+}
+
+.chart-card.wide .chart-wrap {
+  height: 420px;
+}
+
+.dash {
+  min-width: 0;      
+}
+
+.chart-grid,
+.kpi-grid {
+  min-width: 0;      
+}
+
+.card,
+.kpi-card,
+.chart-card,
+.chart-wrap {
+  min-width: 0;     
+}
+
+.chart-wrap canvas {
+  max-width: 100% !important;
+}
+
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+  .chart-card.wide {
+    grid-row: auto;
+  }
+  .chart-wrap,
+  .chart-card.wide .chart-wrap {
+    height: 320px;
+  }
+}
+

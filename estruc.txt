@@ -1,0 +1,5 @@
+app
+-- core         --> cosas globales (guards, interceptors)
+-- layouts      --> estructura visual
+-- pages        --> pantallas (login, dashboard, etc.)
+-- services     --> servicios HTTP / auth

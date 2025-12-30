@@ -1,0 +1,74 @@
+<div class="dash">
+  <div class="dash-head">
+    <div>
+      <h2>Dashboard</h2>
+      <p>Indicadores y gráficos para decisiones comerciales (datos de prueba).</p>
+    </div>
+    <button class="refresh-btn" type="button" title="Refrescar (mock)">
+      <span class="material-icons">refresh</span>
+      Actualizar
+    </button>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card" *ngFor="let k of kpis">
+      <div class="kpi-icon">
+        <span class="material-icons">{{ k.icon }}</span>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-title">{{ k.title }}</div>
+        <div class="kpi-value">{{ k.value }}</div>
+        <div class="kpi-note">{{ k.note }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="chart-grid">
+    <div class="card chart-card wide">
+      <div class="card-title">
+        <span class="material-icons">show_chart</span>
+        Ventas últimos 14 días
+      </div>
+      <div class="chart-wrap">
+        <canvas
+          baseChart
+          [type]="salesLineType"
+          [data]="salesLineData"
+          [options]="salesLineOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card">
+      <div class="card-title">
+        <span class="material-icons">bar_chart</span>
+        Top productos
+      </div>
+      <div class="chart-wrap">
+        <canvas
+          baseChart
+          [type]="topProductsType"
+          [data]="topProductsData"
+          [options]="topProductsOptions">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card">
+      <div class="card-title">
+        <span class="material-icons">donut_large</span>
+        Ocupación bodega
+      </div>
+      <div class="chart-wrap">
+        <canvas
+          baseChart
+          [type]="occupancyType"
+          [data]="occupancyData"
+          [options]="occupancyOptions">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

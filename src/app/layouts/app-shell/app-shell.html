@@ -1,0 +1,71 @@
+<div class="shell" [class.collapsed]="sidebarCollapsed">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="material-icons">warehouse</span>
+      <div class="brand-text">
+        <div class="brand-title">Handsoft</div>
+        <div class="brand-subtitle">Inventario & POS</div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a class="menu-item" routerLink="/dashboard" routerLinkActive="active">
+        <span class="material-icons">dashboard</span>
+        <span class="label">Dashboard</span>
+      </a>
+
+      <a class="menu-item" href="#">
+        <span class="material-icons">inventory_2</span>
+        <span class="label">Productos</span>
+      </a>
+
+      <a class="menu-item" href="#">
+        <span class="material-icons">store</span>
+        <span class="label">Punto de venta</span>
+      </a>
+
+      <a class="menu-item" routerLink="/bodegas" routerLinkActive="active">
+        <span class="material-icons">warehouse</span>
+        <span class="label">Bodegas</span>
+      </a>
+
+
+      <a class="menu-item" href="#">
+        <span class="material-icons">view_in_ar</span>
+        <span class="label">Espacios</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button class="logout-btn" type="button" (click)="logout()" title="Cerrar sesión">
+            <span class="material-icons">logout</span>
+            <span class="label">Cerrar sesión</span>
+        </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn" type="button" (click)="toggleSidebar()" title="Ocultar/Mostrar menú">
+          <span class="material-icons">{{ sidebarCollapsed ? 'menu_open' : 'menu' }}</span>
+        </button>
+        <span class="page-title">Dashboard</span>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" type="button" title="Notificaciones">
+          <span class="material-icons">notifications</span>
+        </button>
+        <div class="user-chip">
+          <span class="material-icons">person</span>
+          <span class="user-name">Usuario</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

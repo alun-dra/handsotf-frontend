@@ -1,0 +1,36 @@
+<div class="page">
+  <div class="page-head">
+    <div>
+      <h2>Bodegas</h2>
+      <p>Administra bodegas y sus espacios de almacenamiento.</p>
+    </div>
+
+    <button class="primary-btn" type="button" title="Crear bodega (mock)">
+      <span class="material-icons">add</span>
+      Nueva bodega
+    </button>
+  </div>
+
+  <div class="grid">
+    <a class="card" *ngFor="let b of bodegas" [routerLink]="['/bodegas', b.id]">
+      <div class="card-top">
+        <div class="badge">
+          <span class="material-icons">{{ typeIcon(b.type) }}</span>
+          <span>{{ typeLabel(b.type) }}</span>
+        </div>
+        <span class="go material-icons">chevron_right</span>
+      </div>
+
+      <div class="title">{{ b.name }}</div>
+      <div class="meta">
+        <span class="material-icons">place</span>
+        <span>{{ b.location }}</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat">{{ b.capacityLabel }}</div>
+        <div class="stat">{{ b.occupancyLabel }}</div>
+      </div>
+    </a>
+  </div>
+</div>

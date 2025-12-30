@@ -1,0 +1,146 @@
+<div class="page" *ngIf="bodega as b">
+  <div class="page-head">
+    <a class="back" routerLink="/bodegas">
+      <span class="material-icons">arrow_back</span>
+      Volver
+    </a>
+
+    <div class="head-main">
+      <div class="title-row">
+        <h2>{{ b.name }}</h2>
+        <span class="badge">
+          <span class="material-icons">{{ typeIcon(b.type) }}</span>
+          {{ typeLabel(b.type) }}
+        </span>
+      </div>
+      <div class="sub">
+        <span class="material-icons">place</span>
+        {{ b.location }}
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab" [class.active]="tab==='RESUMEN'" (click)="setTab('RESUMEN')">
+      <span class="material-icons">insights</span> Resumen
+    </button>
+    <button class="tab" [class.active]="tab==='ESPACIOS'" (click)="setTab('ESPACIOS')">
+      <span class="material-icons">space_dashboard</span> Espacios
+    </button>
+    <button class="tab" [class.active]="tab==='PALLETS'" (click)="setTab('PALLETS')">
+      <span class="material-icons">local_shipping</span> Pallets
+    </button>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="panel" *ngIf="tab==='RESUMEN'">
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title"><span class="material-icons">info</span> Información</div>
+        <div class="row"><span>Nombre</span><b>{{ b.name }}</b></div>
+        <div class="row"><span>Ubicación</span><b>{{ b.location }}</b></div>
+        <div class="row"><span>Tipo</span><b>{{ typeLabel(b.type) }}</b></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="material-icons">analytics</span> Capacidad (mock)</div>
+
+        <ng-container *ngIf="b.type==='RACKS' && b.racks as r">
+          <div class="row"><span>Filas</span><b>{{ r.rows.join(', ') }}</b></div>
+          <div class="row"><span>Racks por fila</span><b>{{ r.racksPerRow }}</b></div>
+          <div class="row"><span>Niveles</span><b>{{ r.levels }}</b></div>
+          <div class="row"><span>Pallets por nivel</span><b>{{ r.palletsPerLevel }}</b></div>
+          <div class="row"><span>Slots totales</span><b>{{ r.rows.length * r.racksPerRow * r.levels * r.palletsPerLevel }}</b></div>
+        </ng-container>
+
+        <ng-container *ngIf="b.type==='PALLETS' && b.pallets as p">
+          <div class="row"><span>Capacidad pallets</span><b>{{ p.maxPallets }}</b></div>
+        </ng-container>
+
+        <ng-container *ngIf="b.type==='AREA_M2' && b.area as a">
+          <div class="row"><span>Área total</span><b>{{ a.totalM2 }} m²</b></div>
+          <div class="row"><span>Arrendatario</span><b>{{ a.tenant }}</b></div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPACIOS -->
+  <div class="panel" *ngIf="tab==='ESPACIOS'">
+    <div class="card">
+      <div class="card-title">
+        <span class="material-icons">space_dashboard</span>
+        Configuración de espacios
+      </div>
+
+      <ng-container *ngIf="b.type==='RACKS' && b.racks as r">
+        <p class="hint">Define la estructura (filas, racks, niveles y capacidad por nivel). Luego se generan ubicaciones (slots).</p>
+
+        <div class="grid4">
+          <div class="mini">
+            <div class="mini-label">Filas</div>
+            <div class="mini-value">{{ r.rows.join(', ') }}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Racks / fila</div>
+            <div class="mini-value">{{ r.racksPerRow }}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Niveles</div>
+            <div class="mini-value">{{ r.levels }}</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Pallets / nivel</div>
+            <div class="mini-value">{{ r.palletsPerLevel }}</div>
+          </div>
+        </div>
+
+        <button class="primary-btn" type="button" (click)="generateSlotsMock()">
+          <span class="material-icons">auto_awesome</span>
+          Generar slots (mock)
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="b.type==='PALLETS' && b.pallets as p">
+        <p class="hint">Esta bodega no tiene racks. Se controla una capacidad total de pallets.</p>
+        <div class="mini">
+          <div class="mini-label">Capacidad total</div>
+          <div class="mini-value">{{ p.maxPallets }} pallets</div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="b.type==='AREA_M2' && b.area as a">
+        <p class="hint">Bodega arrendada por m². El uso depende del arrendatario (control flexible).</p>
+        <div class="grid2">
+          <div class="mini">
+            <div class="mini-label">Área total</div>
+            <div class="mini-value">{{ a.totalM2 }} m²</div>
+          </div>
+          <div class="mini">
+            <div class="mini-label">Arrendatario</div>
+            <div class="mini-value">{{ a.tenant }}</div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- PALLETS -->
+  <div class="panel" *ngIf="tab==='PALLETS'">
+    <div class="card">
+      <div class="card-title"><span class="material-icons">local_shipping</span> Pallets en bodega (mock)</div>
+      <p class="hint">Aquí mostraremos listado de pallets, ubicación y productos (con escaneo en entradas/salidas).</p>
+
+      <div class="pallets">
+        <div class="pallet">
+          <div class="pallet-id"><span class="material-icons">qr_code_2</span> PLT-000124</div>
+          <div class="pallet-meta">Ubicación: A-R03-N2-S07 · Items: 3</div>
+        </div>
+        <div class="pallet">
+          <div class="pallet-id"><span class="material-icons">qr_code_2</span> PLT-000125</div>
+          <div class="pallet-meta">Ubicación: Piso · Items: 1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
