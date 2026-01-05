@@ -1,39 +1,63 @@
 <div class="login-container">
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
   <div class="login-card">
     <div class="login-header">
-      <span class="material-icons login-icon">warehouse</span>
+      <div class="brand-badge">
+        <span class="material-icons login-icon">warehouse</span>
+      </div>
+
       <h1>Iniciar sesión</h1>
-      <p>Handsoft software</p>
+      <p>Handsoft · Inventario & POS</p>
     </div>
 
-    <form class="login-form">
-      <div class="field">
+    <form class="login-form" (submit)="onSubmit($event)">
+      <label class="field">
         <span class="material-icons">person</span>
         <input
+          name="login"
           type="text"
           placeholder="Usuario"
           required
           minlength="3"
           maxlength="50"
           autocomplete="username"
-        >
-      </div>
+        />
+      </label>
 
-      <div class="field">
+      <label class="field">
         <span class="material-icons">lock</span>
         <input
+          name="password"
           type="password"
           placeholder="Contraseña"
           required
           minlength="6"
           autocomplete="current-password"
-        >
+        />
+      </label>
+
+      <div class="row">
+        <label class="remember">
+          <input type="checkbox" />
+          <span>Recordarme</span>
+        </label>
+
+        <a class="link" href="#" (click)="$event.preventDefault()">¿Olvidaste tu contraseña?</a>
       </div>
 
-      <button type="submit">
+      <div class="error" *ngIf="error">{{ error }}</div>
+
+      <button type="submit" [disabled]="loading">
         <span class="material-icons">login</span>
-        Entrar
+        {{ loading ? 'Ingresando...' : 'Entrar' }}
       </button>
+
+      <div class="footnote">
+        <span class="material-icons">lock</span>
+        <span>Acceso seguro</span>
+      </div>
     </form>
   </div>
 </div>

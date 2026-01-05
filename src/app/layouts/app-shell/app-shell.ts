@@ -17,7 +17,6 @@ export class AppShell {
 
 
   logout() {
-  // después lo conectamos a AuthService
     localStorage.clear();
     location.href = '/login';
   }
